@@ -68,5 +68,23 @@ export const useStatsStore = defineStore('stats', {
       })
       return rows.sort((a, b) => b.recipeCount - a.recipeCount)
     },
+
+    // 营养评分榜（本周平均营养评分从高到低）
+    nutritionLeaderboard() {
+      const diet = useDietRecordStore()
+      const rows = BOTS.map((b) => ({
+        name: b.name,
+        avatar: b.avatar,
+        score: b.nutritionScore,
+        isMe: false,
+      }))
+      rows.push({
+        name: useUserStore().name,
+        avatar: useUserStore().avatar,
+        score: diet.avgNutritionThisWeek,
+        isMe: true,
+      })
+      return rows.sort((a, b) => b.score - a.score)
+    },
   },
 })

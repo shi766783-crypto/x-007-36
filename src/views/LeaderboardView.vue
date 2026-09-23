@@ -10,7 +10,7 @@ const medals = ['🥇', '🥈', '🥉']
   <div>
     <h2>🏆 排行榜</h2>
 
-    <div class="grid grid-2">
+    <div class="grid grid-3">
       <div class="card">
         <div class="section-title">♻️ 节约达人榜 <span class="muted small">按食材浪费率从低到高</span></div>
         <div class="board">
@@ -41,6 +41,23 @@ const medals = ['🥇', '🥈', '🥉']
             <span class="avatar">{{ row.avatar }}</span>
             <span class="name">{{ row.name }}</span>
             <span class="val">{{ row.recipeCount }} 道</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">🥗 营养评分榜 <span class="muted small">按本周平均营养评分排序</span></div>
+        <div class="board">
+          <div
+            v-for="(row, i) in stats.nutritionLeaderboard"
+            :key="row.name"
+            class="row"
+            :class="{ me: row.isMe }"
+          >
+            <span class="rank">{{ medals[i] || i + 1 }}</span>
+            <span class="avatar">{{ row.avatar }}</span>
+            <span class="name">{{ row.name }}</span>
+            <span class="val">{{ row.nutritionScore }} 分</span>
           </div>
         </div>
       </div>
